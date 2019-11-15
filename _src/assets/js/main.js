@@ -9,7 +9,10 @@ const shippingCost = document.querySelector(".js-shippingCost")
 const total = document.querySelector(".js-total")
 const buyButton = document.querySelector(".js-buyButton")
 
+
+
 let ingredientsPrices = []
+let ingredientsToSum = []
 
 const getDataFromApi = () => {
     const endPoint = 'https://raw.githubusercontent.com/Adalab/recipes-data/master/rissoto-setas.json';
@@ -54,46 +57,80 @@ const getIngredientPrice = event => {
     addPriceToArray(ingredientActualPrice)
 }
 
-const addPriceToArray = (ingredientActualPrice) => {
+const sumTotalPrice = () => {
+    let subtotalPrice = 0
 
+    for (let i = 0; i < ingredientsToSum.length; i++) {
+        if (i === 0) {
+            subtotalPrice = ingredientsToSum[i].price
+        } else {
+            subtotalPrice = subtotalPrice + ingredientsToSum[i].price
+        }
+    }
+    printPrices(subtotalPrice)
+}
+
+const addPriceToArray = (ingredientActualPrice) => {
+    let repeatedIngredient = ingredientsPrices.findIndex(ingredient => ingredient.id === ingredientActualPrice.id)
     if (ingredientsPrices.length === 0) {
         ingredientsPrices.push(ingredientActualPrice)
     } else {
-        let repeatedIngredient = ingredientsPrices.findIndex(ingredient => ingredient.id === ingredientActualPrice.id)
+
         if (repeatedIngredient >= 0) {
             ingredientsPrices.splice(repeatedIngredient, 1)
         }
         ingredientsPrices.push(ingredientActualPrice)
+    }
+    if (event.target.previousElementSibling.checked) {
+
+        for (const ingredient of ingredientsPrices) {
+            if (ingredientsToSum.length === 1) {
+                ingredientsToSum.splice(0, 1)
+                ingredientsToSum.push(ingredient)
+            } else if (ingredient.id === ingredientsToSum[repeatedIngredient].id) {
+                ingredientsToSum.splice(repeatedIngredient, 1)
+                ingredientsToSum.push(ingredient)
+            }
+        }
+    }
+    sumTotalPrice()
+
+}
+
+const printPrices = (subtotalPrice) => {
+    if (subtotalPrice > 0) {
+        const total = subtotalPrice + 7
+        subtotal.innerHTML = subtotalPrice.toFixed(2)
+        buyButton.innerHTML = total.toFixed(2)
+    } else {
+        subtotal.innerHTML = '0'
+        buyButton.innerHTML = '0'
+    }
+}
+
+const addIngredientsToSum = (event) => {
+    const ingredientIdSelected = event.target.parentElement.dataset.index
+    if (event.target.checked) {
+        for (const ingredient of ingredientsPrices) {
+            if (ingredient.id === ingredientIdSelected) {
+                ingredientsToSum.push(ingredient)
+            }
+        }
+    } else {
+        let repeatedIngredient = ingredientsToSum.findIndex(ingredient => ingredient.id === ingredientIdSelected)
+        if (repeatedIngredient >= 0) {
+            ingredientsToSum.splice(repeatedIngredient, 1)
+        }
     }
     sumTotalPrice()
 }
 
 
 
-
-const printPrices = (subtotalPrice) => {
-    const total = subtotalPrice + 7
-    subtotal.innerHTML = subtotalPrice.toFixed(2)
-    buyButton.innerHTML = total.toFixed(2)
-}
-
-
-const sumTotalPrice = () => {
-    let subtotalPrice = ""
-    for (let i = 0; i < ingredientsPrices.length; i++) {
-        if (i === 0) {
-            subtotalPrice = ingredientsPrices[i].price
-        } else {
-            subtotalPrice = subtotalPrice + ingredientsPrices[i].price
-        }
-    }
-    return printPrices(subtotalPrice)
-}
-
 const listenToIngredients = () => {
     const ingredientsCheckbox = document.querySelectorAll(".js-inputCheckbox")
     for (const ingredient of ingredientsCheckbox) {
-        ingredient.addEventListener('change', addPriceToArray);
+        ingredient.addEventListener('change', addIngredientsToSum);
     }
 
     const ingredientsNumber = document.querySelectorAll(".js-inputNumber")
