@@ -4,27 +4,139 @@
 body {
 	margin: 0;
 	height: 100vh;
+	font-family: Verdana, 'sans-serif';
 }
 
 .container{
-	border: 2px solid grey;
-	padding: 30px;
+	border: 2px solid #4991E2;
+	//padding: 30px;
 	opacity: 80%;
+	padding: 0;
+}
+.general-info{
+	border-bottom: 2px solid #4991E2;
+	padding: 30px 30px 10px 30px;
+}
+
+.title{
+	font-family: 'Bitter', serif;
+	font-weight: bold;
+}
+
+.title-ingredients{
+	font-size: 20px;
+	letter-spacing: 1.5pt;
+	margin-bottom: 0;
 }
 
 .ingredients{
-	&__list{
-		min-height: 80px;
-		color: darkblue;
+	&__select{
 		display: flex;
-		justify-content: center;
+		flex-direction: row;
+		color: #4991E2;
+		text-decoration: underline;
+		height: 20px;
+		font-size: 14px;
+	}&__selectAll{
+		margin-right: 10px;
+		cursor: pointer;
+		&:hover{
+			opacity: 100%;
+			font-size: 15px;
+		}
+	}&__deselectAll{
+		margin-left: 10px;
+		cursor: pointer;
+		&:hover{
+			font-size: 15px;
+		}
+	}&__list-container{
+		padding: 10px 0px 10px 0px;	
+	}&__list{
+		min-height: 80px;
+		color:#40444a ;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}&__list-background{
+		background-color: #EEEEEE;
+	}&__data{
+		display: flex;
 		align-items: center;
 	}&__checkbox{
 		color: red;
+		margin-left: 20px;
 	}&__input{
-		min-height: 50px;
-		min-width: 80px;
+		color: #4991E2;
+		font-weight: 500;
+		padding-left: 10px;
+		font-size: 24px;
+		height: 55px;
+		width: 55px;
+		text-align: center;
+		margin: 10px;
+		border-radius: 5px;
+		border: 1px solid grey;
 	}&__info{
-		font-size: 10px; //aquí ni puto caso
+		margin-left: 5px;
+	}&__info-title{
+		font-size: 18px;
+		font-family: 'Bitter', serif;
+		margin-bottom: 2px;
+	}&__info-brand{
+		font-size: 14px;
+		opacity: 80%;
+		margin-bottom: 2px;
+	}&__info-quantity{
+		font-size: 12px;
+		margin: 0;
+	}&__price{
+		font-family: 'Bitter', 'serif';
+		font-size: 24px;
+		margin: 0px 20px 0px 0px;
+		color: #4D8F00;
 	}
+}
+
+.totalinfo{
+	display: flex;
+	justify-content: space-between;
+	margin: 0 30px 0 30px;
+&__items{
+	display: flex;
+	margin-left: 30px;
+	font-size: 14px;
+}&__items-title{
+	opacity: 70%;
+	margin-right: 5px;
+}&__items-number{
+	font-size: 14px;
+}&__number{
+	font-weight: bold;
+}&__titles{
+	opacity: 70%;
+}&__total-euros{
+font-size: 20px;
+font-weight: bold;
+color: #4D8F00;
+}
+}
+
+.shopping-button{
+	border-radius: 5px;
+	height: 50px;
+	color: white;
+	width: 80%;
+	display: flex;
+	justify-content: center;
+	align-self: center;
+	font-size: 20px;
+	margin: auto;
+	margin-bottom: 30px;
+	margin-top: 20px;
+	background-color:#4D8F00; 
+&__euros{
+	margin-left: 5px;
+	font-size: 20px;
+}
 }
