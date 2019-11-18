@@ -3,27 +3,32 @@
 
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="./assets/css/main.css">
   <title>My Shop List</title>
 </head>
 
 <body>
-  <main class="container">
-    <h4>INGREDIENTES</h4>
-    <h1 class="js-title"></h1>
-    <div>
-      <button>Seleccionar todo</button>
-      <button>Deseleccionar todo</button>
-    </div>
+  <main>
+    <div class=" container container-fluid">
+      <h4 class="row col-12">INGREDIENTES</h4>
+      <h1 class="js-title row col-12"></h1>
+      <div class="row">
+        <button class="js-selectAll col-3">Seleccionar todo</button>
+        <button class="js-deselectAll col-3">Deseleccionar todo</button>
+      </div>
+      <div>
+        <ul class="js-ingredientsList"></ul>
+      </div>
+      <p class="row col-12">Items: <span class="js-totalItems"></span></span></p>
+      <p class="js-subtotal row col-12"></p>
+      <p class="js-shippingCost">Gastos de envío <span>7,00 €</span></sp>
+      </p>
+      <p class="row col-8">Total: <span class="js-total"></span></p>
+      <button class="row col-8">Comprar ingredientes: <span class="js-buyButton">0</span>€</button>
 
-    <div>
-      <ul class="js-ingredientsList"></ul>
     </div>
-    <p class="js-totalItems"></p>
-    <p class="js-subtotal"></p>
-    <p class="js-shippingCost"></p>
-    <p class="js-total"></p>
-    <button>Comprar ingredientes: <span class="js-buyButton">0</span>€</button>
   </main>
   <script type="text/javascript" src="./assets/js/main.js"></script>
 </body>

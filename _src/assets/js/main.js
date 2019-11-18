@@ -1,13 +1,17 @@
 
 'use strict';
 
+const selectAll = document.querySelector(".js-selectAll")
+const deselectAll = document.querySelector(".js-deselectAll")
 const title = document.querySelector(".js-title")
 const ingredientsList = document.querySelector(".js-ingredientsList")
-const items = document.querySelector(".js-items")
+const items = document.querySelector(".js-totalItems")
 const subtotal = document.querySelector(".js-subtotal")
 const shippingCost = document.querySelector(".js-shippingCost")
 const total = document.querySelector(".js-total")
 const buyButton = document.querySelector(".js-buyButton")
+
+
 
 
 
@@ -19,7 +23,6 @@ const getDataFromApi = () => {
     fetch(endPoint)
         .then(response => response.json())
         .then(data => {
-            console.log(data)
             printRecipe(data)
         });
 };
@@ -29,13 +32,13 @@ const printRecipe = data => {
     const ingredients = data.recipe.ingredients
     let htmlCode = ""
     for (let i = 0; i < ingredients.length; i++) {
-        htmlCode += `<li data-index=${i} >`
-        htmlCode += "<input class='js-inputCheckbox' type='checkbox'/>"
-        htmlCode += "<input class='js-inputNumber' name='quantity' min='0' type='number'/>"
-        htmlCode += `<div> <h4> ${ingredients[i].product}</h4>`
+        htmlCode += `<li data-index=${i} class="ingredients__list row">`
+        htmlCode += "<input class='ingredients__checkbox js-inputCheckbox col-1' type='checkbox'/>"
+        htmlCode += "<input class='ingredients__input js-inputNumber col-1' placeholder='1' name='quantity' min='0' type='number'/>"
+        htmlCode += `<div class="ingredients__info col-8"> <h4> ${ingredients[i].product}</h4>`
         htmlCode += `<h5>${ingredients[i].brand === undefined ? "" : ingredients[i].brand}</h5>`
         htmlCode += `<h6>${ingredients[i].quantity}</h6> </div>`
-        htmlCode += `<h3 class = 'js-ingredientPrice'>${ingredients[i].price}<span>€</span></h3> </li>`
+        htmlCode += `<h3 class = 'ingredients__price js-ingredientPrice col-2'>${ingredients[i].price}<span>€</span></h3> </li>`
     }
     ingredientsList.innerHTML = htmlCode
     listenToIngredients()
@@ -51,6 +54,7 @@ const getIngredientPrice = event => {
 
     ingredientActualPrice = {
         price: inputValue * price,
+        value: inputValue,
         id: id
     }
 
@@ -108,6 +112,14 @@ const printPrices = (subtotalPrice) => {
     }
 }
 
+const countTotalItems = () => {
+    let totalItems = 0
+    for (const item of ingredientsToSum) {
+        totalItems = totalItems + item.value
+    }
+    items.innerHTML = totalItems
+}
+
 const addIngredientsToSum = (event) => {
     const ingredientIdSelected = event.target.parentElement.dataset.index
     if (event.target.checked) {
@@ -122,23 +134,44 @@ const addIngredientsToSum = (event) => {
             ingredientsToSum.splice(repeatedIngredient, 1)
         }
     }
+    countTotalItems()
     sumTotalPrice()
 }
 
 
+
+const selectAllIngredients = () => {
+    const ingredientsCheckboxToArray = [...document.querySelectorAll(".js-inputCheckbox")];
+    ingredientsCheckboxToArray.map(ingredient => {
+        if (!ingredient.checked) {
+            return ingredient.checked = true
+        }
+    })
+}
+
+const deselectAllIngredients = () => {
+    const ingredientsCheckboxToArray = [...document.querySelectorAll(".js-inputCheckbox")];
+    ingredientsCheckboxToArray.map(ingredient => {
+        if (ingredient.checked) {
+            return ingredient.checked = false
+        }
+    })
+}
 
 const listenToIngredients = () => {
     const ingredientsCheckbox = document.querySelectorAll(".js-inputCheckbox")
     for (const ingredient of ingredientsCheckbox) {
         ingredient.addEventListener('change', addIngredientsToSum);
     }
-
     const ingredientsNumber = document.querySelectorAll(".js-inputNumber")
+
     for (const ingredient of ingredientsNumber) {
         ingredient.addEventListener('change', getIngredientPrice)
     }
 }
 
+selectAll.addEventListener('click', selectAllIngredients)
+deselectAll.addEventListener('click', deselectAllIngredients)
 getDataFromApi();
 printRecipe(data);
 

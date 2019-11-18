@@ -2,7 +2,29 @@
 @import 'core/links';
 
 body {
-	background: url('../images/logo-adalab-80px.png') center center no-repeat $color-white;
 	margin: 0;
 	height: 100vh;
+}
+
+.container{
+	border: 2px solid grey;
+	padding: 30px;
+	opacity: 80%;
+}
+
+.ingredients{
+	&__list{
+		min-height: 80px;
+		color: darkblue;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}&__checkbox{
+		color: red;
+	}&__input{
+		min-height: 50px;
+		min-width: 80px;
+	}&__info{
+		font-size: 10px; //aquí ni puto caso
+	}
 }
