@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+    
+    <head>
+        <meta charset="UTF-8">
+        <link href="https://fonts.googleapis.com/css?family=Bitter:400,700&display=swap"
+        rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
+        <link rel="stylesheet" href="./assets/css/main.css">
+        <title>My Shop List</title>
+    </head>
+    
+    <body>
+        <main>
+            <div class="container">
+                <div class="general-info">
+                     <h4 class="title-ingredients">INGREDIENTES</h4>
+
+                     <h1 class="title js-title"></h1>
+
+                    <div class="ingredients__select">
+                        <p class="js-selectAll ingredients__selectAll">Seleccionar todo</p> <span>|</span>
+
+                        <p class="ingredients__deselectAll js-deselectAll">Deseleccionar todo</p>
+                    </div>
+                </div>
+                <div>
+                    <ul class="js-ingredientsList ingredients__list-container"></ul>
+                </div>
+                <div class="totalinfo__items">
+                    <p class="totalinfo__items-title">Items:</p> <span class="js-totalItems totalinfo__items-number"> 0</span>
+
+                </div>
+                <div class="totalinfo">
+                    <p class="totalinfo__titles">Subtotal:</p> <span class="js-subtotal totalinfo__number">0</span>
+
+                </div>
+                <div class="totalinfo">
+                    <p class="js-shippingCost totalinfo__titles">Gastos de envío:</p> <span class="totalinfo__number">7,00 €</span>
+
+                </div>
+                <div class="totalinfo totalinfo__total">
+                    <p>Total:</p> <span class="js-total totalinfo__total-euros">0</span>
+
+                </div>
+                <button class="shopping-button">Comprar ingredientes: <span class="js-buyButton shopping-button__euros">
+        </span>
+                </button>
+            </div>
+        </main>
+        <script type="text/javascript" src="./assets/js/main.js"></script>
+    </body>
+
+</html>

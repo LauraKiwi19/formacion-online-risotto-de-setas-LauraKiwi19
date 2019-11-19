@@ -12,6 +12,11 @@ body {
 	//padding: 30px;
 	opacity: 80%;
 	padding: 0;
+	margin: auto;
+	width: 80%;
+	@media all and (max-width: 768px){
+		margin: 0;
+	}
 }
 .general-info{
 	border-bottom: 2px solid #4991E2;
@@ -21,6 +26,9 @@ body {
 .title{
 	font-family: 'Bitter', serif;
 	font-weight: bold;
+	@media all and (max-width: 768px){
+		font-size: 35px;
+	}
 }
 
 .title-ingredients{
@@ -140,3 +148,11 @@ color: #4D8F00;
 	font-size: 20px;
 }
 }
+
+/* 
+@media all and (min-width: 768px) {
+	padding: 4px;
+	height: 85px;
+	width: 85px;
+  }
+  @media all and (min-width: 1200px) */
